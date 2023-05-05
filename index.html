@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Body Harp</title>
+  <link rel="stylesheet" type="text/css" href="appstyle.css">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/webmidi@next/dist/iife/webmidi.iife.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.31/Tone.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tonal/browser/tonal.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <video class="input_video"></video>
+    <div class="canvas-container">
+    <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class = "column0" id="column0" value=1>
+        <label class="label"
+        for="Note0"></label>
+          <select name="Note0" id="Note0">
+            <option value=0 selected>C</option>
+            <option value=1>C#</option>
+            <option value=2>D</option>
+            <option value=3>D#</option>
+            <option value=4>E</option>
+            <option value=5>F</option>
+            <option value=6>F#</option>
+            <option value=7>G</option>
+            <option value=8>G#</option>
+            <option value=9>A</option>
+            <option value=10>Bb</option>
+            <option value=11>B</option>
+            <option value=12>C Major</option>
+            <option value=13>C minor</option>
+            <option value=14>Db Major</option>
+            <option value=15>C# minor</option>
+            <option value=16>D Major</option>
+            <option value=17>D minor</option>
+            <option value=18>Eb Major</option>
+            <option value=19>Eb minor</option>
+            <option value=20>E Major</option>
+            <option value=21>E minor</option>
+            <option value=22>F Major</option>
+            <option value=23>F minor</option>
+            <option value=24>F# Major</option>
+            <option value=25>F# minor</option>
+            <option value=26>G Major</option>
+            <option value=27>G minor</option>
+            <option value=28>Ab Major</option>
+            <option value=29>G# minor</option>
+            <option value=30>A Major</option>
+            <option value=31>A minor</option>
+            <option value=32>Bb Major</option>
+            <option value=33>Bb minor</option>
+            <option value=34>B Major</option>
+            <option value=35>B minor</option>
+          </select>
+    </div>
+    <div class = "column1" id="column1" value=2>
+      <label class="label"
+        for="Note1"></label>
+          <select name="Note1" id="Note1">
+            <option value=0>C</option>
+            <option value=1>C#</option>
+            <option value=2 selected>D</option>
+            <option value=3>D#</option>
+            <option value=4>E</option>
+            <option value=5>F</option>
+            <option value=6>F#</option>
+            <option value=7>G</option>
+            <option value=8>G#</option>
+            <option value=9>A</option>
+            <option value=10>Bb</option>
+            <option value=11>B</option>
+            <option value=12>C Major</option>
+            <option value=13>C minor</option>
+            <option value=14>Db Major</option>
+            <option value=15>C# minor</option>
+            <option value=16>D Major</option>
+            <option value=17>D minor</option>
+            <option value=18>Eb Major</option>
+            <option value=19>Eb minor</option>
+            <option value=20>E Major</option>
+            <option value=21>E minor</option>
+            <option value=22>F Major</option>
+            <option value=23>F minor</option>
+            <option value=24>F# Major</option>
+            <option value=25>F# minor</option>
+            <option value=26>G Major</option>
+            <option value=27>G minor</option>
+            <option value=28>Ab Major</option>
+            <option value=29>G# minor</option>
+            <option value=30>A Major</option>
+            <option value=31>A minor</option>
+            <option value=32>Bb Major</option>
+            <option value=33>Bb minor</option>
+            <option value=34>B Major</option>
+            <option value=35>B minor</option>
+          </select>
+    </div>
+    <div class = "column2" id="column2" value=3>
+      <label class="label"
+        for="Note2"></label>
+          <select name="Note2" id="Note2">
+            <option value=0>C</option>
+            <option value=1>C#</option>
+            <option value=2>D</option>
+            <option value=3>D#</option>
+            <option value=4 selected>E</option>
+            <option value=5>F</option>
+            <option value=6>F#</option>
+            <option value=7>G</option>
+            <option value=8>G#</option>
+            <option value=9>A</option>
+            <option value=10>Bb</option>
+            <option value=11>B</option>
+            <option value=12>C Major</option>
+            <option value=13>C minor</option>
+            <option value=14>Db Major</option>
+            <option value=15>C# minor</option>
+            <option value=16>D Major</option>
+            <option value=17>D minor</option>
+            <option value=18>Eb Major</option>
+            <option value=19>Eb minor</option>
+            <option value=20>E Major</option>
+            <option value=21>E minor</option>
+            <option value=22>F Major</option>
+            <option value=23>F minor</option>
+            <option value=24>F# Major</option>
+            <option value=25>F# minor</option>
+            <option value=26>G Major</option>
+            <option value=27>G minor</option>
+            <option value=28>Ab Major</option>
+            <option value=29>G# minor</option>
+            <option value=30>A Major</option>
+            <option value=31>A minor</option>
+            <option value=32>Bb Major</option>
+            <option value=33>Bb minor</option>
+            <option value=34>B Major</option>
+            <option value=35>B minor</option>
+          </select>
+    </div>
+    <div class = "column3" id="column3" value=4>
+      <label class="label"
+        for="Note3"></label>
+          <select name="Note3" id="Note3">
+            <option value=0 selected>C</option>
+            <option value=1>C#</option>
+            <option value=2>D</option>
+            <option value=3>D#</option>
+            <option value=4>E</option>
+            <option value=5>F</option>
+            <option value=6>F#</option>
+            <option value=7 selected>G</option>
+            <option value=8>G#</option>
+            <option value=9>A</option>
+            <option value=10>Bb</option>
+            <option value=11>B</option>
+            <option value=12>C Major</option>
+            <option value=13>C minor</option>
+            <option value=14>Db Major</option>
+            <option value=15>C# minor</option>
+            <option value=16>D Major</option>
+            <option value=17>D minor</option>
+            <option value=18>Eb Major</option>
+            <option value=19>Eb minor</option>
+            <option value=20>E Major</option>
+            <option value=21>E minor</option>
+            <option value=22>F Major</option>
+            <option value=23>F minor</option>
+            <option value=24>F# Major</option>
+            <option value=25>F# minor</option>
+            <option value=26>G Major</option>
+            <option value=27>G minor</option>
+            <option value=28>Ab Major</option>
+            <option value=29>G# minor</option>
+            <option value=30>A Major</option>
+            <option value=31>A minor</option>
+            <option value=32>Bb Major</option>
+            <option value=33>Bb minor</option>
+            <option value=34>B Major</option>
+            <option value=35>B minor</option>
+          </select>
+    </div>
+  </div>
+  <div class="control-panel">
+    Choose your sound
+    <label class="label"
+      for="sound"></label>
+        <select name="sound" id="sound">
+          <option value="basic" selected>Basic</option>
+          <option value="casio">Casio</option>
+          <option value="piano">Piano</option>
+          <option value="pad">Synth Pad</option>
+        </select><br>
+        Choose bodypart 
+        <label class="label"
+          for="bodypart"></label>
+            <select name="bodypart" id="bodypart">
+              <option value="nose" selected>Nose</option>
+              <option value="rightWrist">Right Wrist</option>
+              <option value="leftWrist">Left Wrist</option>
+              <option value="leftAnkle">Left Ankle</option>
+              <option value="rightAnkle">right Ankle</option>
+            </select><br>
+            Sensitivity<input type="range" id="sensitivity" name="sensitivity" min="1" max="10" step="0.25" value="5">
+            <label for="sensitivity"></label>
+            <span id="sensitivityValue" class="rangeValue">5</span><br>
+            <div id="dropdown">
+              MIDI out device
+              <select id="device" onchange="changeDevice()">
+              </select></div>
+            Send MIDI<input id="sendMidi" type="checkbox">
+              Channel
+              <input type="number" id="midiChannel" min="1" max="16" value="1"/>
+            <!--<button type="button" id="octaveUp" onclick="octaveUp()"> + 8ve</button>
+            <button type="button" id="octaveDown" onclick="octaveDown()"> - 8ve</button>-->
+
+  </div>      
+  <script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>
